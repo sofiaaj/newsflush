@@ -8,9 +8,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".UserZipcode"></activity>
-        <activity android:name=".MainActivity" />
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".ExploreNews"></activity>
+        <activity android:name=".SelectTime" />
+        <activity android:name=".UserZipcode" />
+        <activity android:name=".SelectInterests" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

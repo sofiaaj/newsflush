@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/boogaloo</item>
+        <item>@font/lobster</item>
+        <item>@font/oswald</item>
+        <item>@font/oswald_bold</item>
         <item>@font/roboto</item>
         <item>@font/roboto_condensed_bold</item>
+        <item>@font/viga</item>
     </array>
 </resources>
