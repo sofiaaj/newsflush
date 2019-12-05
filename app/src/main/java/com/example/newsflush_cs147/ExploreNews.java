@@ -5,9 +5,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,11 +20,14 @@ public class ExploreNews extends AppCompatActivity {
     ArrayList<News> newsList;
     ArrayList<String> userCategory;
     Integer userTime = 5;
+    ImageView ivBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore_news);
+        ivBack = findViewById(R.id.ivBack);
+        setButtonListener();
         newsList = new ArrayList<>();
         userCategory = (ArrayList<String>) getIntent().getSerializableExtra("categories");
         String time = getIntent().getStringExtra("time");
@@ -48,6 +54,19 @@ public class ExploreNews extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
+
+    private void setButtonListener(){
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ExploreNews.this, SelectTime.class);
+                intent.putExtra("categories", userCategory);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

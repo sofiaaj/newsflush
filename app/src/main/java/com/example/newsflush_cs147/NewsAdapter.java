@@ -1,11 +1,13 @@
 package com.example.newsflush_cs147;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +17,7 @@ import java.util.List;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     private List<News> mNews;
+    Context context;
 
     public NewsAdapter(List<News> news) {
         mNews = news;
@@ -23,7 +26,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     @NonNull
     @Override
     public NewsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
+        context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
@@ -57,6 +60,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             holder.ivIcon.setImageResource(R.drawable.icon_local);
         } else if(currNews.getCategory().equals("Sports")){
             holder.ivIcon.setImageResource(R.drawable.icon_sports);
+        } else if(currNews.getCategory().equals("Science")){
+            holder.ivIcon.setImageResource(R.drawable.icon_science);
+        } else if(currNews.getCategory().equals("Politics")){
+            holder.ivIcon.setImageResource(R.drawable.icon_politics);
+        } else if(currNews.getCategory().equals("Art")){
+            holder.ivIcon.setImageResource(R.drawable.icon_art);
         }
 
     }
@@ -66,7 +75,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         return mNews.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView tvCategory;
         public TextView tvHeadline;
         public TextView tvSummary;
@@ -83,9 +92,20 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             tvSummary = (TextView) itemView.findViewById(R.id.tvSummary);
             tvTime = (TextView) itemView.findViewById(R.id.tvTime);
             ivIcon = (ImageView) itemView.findViewById(R.id.ivIcon);
-
+            tvCategory.setOnClickListener(this);
+            tvHeadline.setOnClickListener(this);
+            tvSummary.setOnClickListener(this);
+            tvTime.setOnClickListener(this);
+            ivIcon.setOnClickListener(this);
         }
 
 
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            final News currNews = mNews.get(position);
+            Intent i = new Intent(context, SelectInterests.class);
+            context.startActivity(i);
+        }
     }
 }
