@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,7 +44,21 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         category.setText(currNews.getCategory());
         headline.setText(currNews.getHeadline());
         summary.setText(currNews.getSummary());
-        time.setText(currNews.getTime());
+        time.setText(currNews.getTime() + " Minutes");
+        if(currNews.getCategory().equals("Health")){
+            holder.ivIcon.setImageResource(R.drawable.icon_health);
+        } else if(currNews.getCategory().equals("Climate")){
+            holder.ivIcon.setImageResource(R.drawable.icon_climate);
+        } else if(currNews.getCategory().equals("Tech")){
+            holder.ivIcon.setImageResource(R.drawable.icon_tech);
+        } else if(currNews.getCategory().equals("Business")){
+            holder.ivIcon.setImageResource(R.drawable.icon_business);
+        } else if(currNews.getCategory().equals("Local")){
+            holder.ivIcon.setImageResource(R.drawable.icon_local);
+        } else if(currNews.getCategory().equals("Sports")){
+            holder.ivIcon.setImageResource(R.drawable.icon_sports);
+        }
+
     }
 
     @Override
@@ -56,6 +71,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         public TextView tvHeadline;
         public TextView tvSummary;
         public TextView tvTime;
+        public ImageView ivIcon;
 
         public ViewHolder(View itemView) {
             // Stores the itemView in a public final member variable that can be used
@@ -66,6 +82,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             tvHeadline = (TextView) itemView.findViewById(R.id.tvHeadline);
             tvSummary = (TextView) itemView.findViewById(R.id.tvSummary);
             tvTime = (TextView) itemView.findViewById(R.id.tvTime);
+            ivIcon = (ImageView) itemView.findViewById(R.id.ivIcon);
 
         }
 

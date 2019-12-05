@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -32,11 +33,14 @@ public class SelectInterests extends AppCompatActivity {
     Button btnLocal;
     Button btnClimate;
     HashMap<Button, TranslateAnimation> allAnimations;
+    ArrayList<String> userCategory;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_interests);
+        userCategory = new ArrayList<>();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         TextView tvInterestInstructions = findViewById(R.id.tvInterestInstructions);
         String interestInstructions = "Tap to select the topics you are interested in. " + "<b>" + "Flush when you are done." + "</b>";
@@ -77,8 +81,11 @@ public class SelectInterests extends AppCompatActivity {
                         }
 
                     }
-                    Intent intent = new Intent(SelectInterests.this, SelectTime.class);
-                    startActivity(intent);
+
+                        Intent intent = new Intent(SelectInterests.this, SelectTime.class);
+                        intent.putExtra("categories", userCategory);
+                        startActivity(intent);
+
 
                 }
 
@@ -96,20 +103,21 @@ public class SelectInterests extends AppCompatActivity {
         ivToilet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for(final Button curr : allInterests){
-                    if(!curr.isSelected()){
-                        TranslateAnimation anim = allAnimations.get(curr);
-                        curr.startAnimation(anim);
-                        if(anim.hasEnded()){
-                            curr.setVisibility(View.INVISIBLE);
+                if(userCategory.size() <= 0){
+                    Toast.makeText(getApplicationContext(), "Please select at least one interest", Toast.LENGTH_LONG).show();
+                }else {
+
+                    for (final Button curr : allInterests) {
+                        if (!curr.isSelected()) {
+                            TranslateAnimation anim = allAnimations.get(curr);
+                            curr.startAnimation(anim);
+                            if (anim.hasEnded()) {
+                                curr.setVisibility(View.INVISIBLE);
+                            }
                         }
                     }
-                }
-//                TranslateAnimation animation = new TranslateAnimation(0, 300,0, 100);
-//                animation.setDuration(500);
-//                btnHealth.startAnimation(animation);
-//                btnTech.startAnimation(animation);
 
+                }
 
 
             }
@@ -145,8 +153,12 @@ public class SelectInterests extends AppCompatActivity {
                 public void onClick(View v) {
                     if(curr.isSelected()){
                         curr.setSelected(false);
+                        String category = curr.getText().toString();
+                        userCategory.remove(category);
                     } else {
                         curr.setSelected(true);
+                        String category = curr.getText().toString();
+                        userCategory.add(category);
                     }
                 }
             });

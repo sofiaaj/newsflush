@@ -10,18 +10,35 @@ import android.view.Menu;
 import android.view.WindowManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ExploreNews extends AppCompatActivity {
 
     ArrayList<News> newsList;
+    ArrayList<String> userCategory;
+    Integer userTime = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore_news);
+        newsList = new ArrayList<>();
+        userCategory = (ArrayList<String>) getIntent().getSerializableExtra("categories");
+        String time = getIntent().getStringExtra("time");
+        if(time.equals("Taco")){
+            userTime = 10;
+        } else if(time.equals("Boss")){
+            userTime = 15;
+        }
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         RecyclerView rvNews = findViewById(R.id.rvNews);
-        newsList = News.createNewsList();
+        ArrayList<News> allNews = News.createNewsList();
+        for(News curr : allNews){
+            if(userCategory.contains(curr.getCategory()) || Integer.valueOf(curr.getTime()) <= userTime){
+                newsList.add(curr);
+            }
+        }
+        Collections.shuffle(newsList);
         NewsAdapter newsAdapter = new NewsAdapter(newsList);
         rvNews.setAdapter(newsAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
