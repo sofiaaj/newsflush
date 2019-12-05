@@ -7,10 +7,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,6 +27,7 @@ public class ExploreNews extends AppCompatActivity {
     ArrayList<String> userCategory;
     Integer userTime = 5;
     ImageView ivBack;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +52,12 @@ public class ExploreNews extends AppCompatActivity {
             }
         }
         Collections.shuffle(newsList);
-        NewsAdapter newsAdapter = new NewsAdapter(newsList);
+        NewsAdapter newsAdapter = new NewsAdapter(newsList, userCategory);
         rvNews.setAdapter(newsAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setReverseLayout(true);
         rvNews.setLayoutManager(layoutManager);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
@@ -72,5 +79,43 @@ public class ExploreNews extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    public void onButtonShowPopupWindowClick(MenuItem item) {
+
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.popup_window, null);
+
+        // create the popup window
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+        popupWindow.showAtLocation(toolbar, Gravity.TOP | Gravity.RIGHT, 45, 45);
+        TextView tvZipcode = popupView.findViewById(R.id.tvZipcode);
+        TextView tvInterests = popupView.findViewById(R.id.tvInterests);
+        TextView tvCancel = popupView.findViewById(R.id.tvCancel);
+        tvZipcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ExploreNews.this, UserZipcode.class);
+                startActivity(i);
+            }
+        });
+        tvInterests.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ExploreNews.this, SelectInterests.class);
+                startActivity(i);
+            }
+        });
+        tvCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
     }
 }

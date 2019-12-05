@@ -12,15 +12,18 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     private List<News> mNews;
+    private ArrayList<String> userCategory;
     Context context;
 
-    public NewsAdapter(List<News> news) {
+    public NewsAdapter(List<News> news, ArrayList<String> categories) {
         mNews = news;
+        userCategory = categories;
     }
 
     @NonNull
@@ -104,7 +107,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         public void onClick(View v) {
             int position = getAdapterPosition();
             final News currNews = mNews.get(position);
-            Intent i = new Intent(context, SelectInterests.class);
+            String article = currNews.getArticle();
+            String headline = currNews.getHeadline();
+            Intent i = new Intent(context, ReadNews.class);
+            i.putExtra("article", article);
+            i.putExtra("headline", headline);
+            i.putExtra("category", currNews.getCategory());
             context.startActivity(i);
         }
     }

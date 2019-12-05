@@ -53,12 +53,11 @@
 
     <ImageView
         android:id="@+id/ivBack"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="71dp"
+        android:layout_height="49dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="24dp"
-        android:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="?attr/homeAsUpIndicator" />
