@@ -47,7 +47,7 @@ public class SelectTime extends AppCompatActivity {
 
     }
 
-    public void onButtonShowPopupWindowClick(MenuItem item) {
+    public void onButtonShowPopupWindowClick(View item) {
 
         // inflate the layout of the popup window
         LayoutInflater inflater = (LayoutInflater)
@@ -104,6 +104,11 @@ public class SelectTime extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 
 

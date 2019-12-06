@@ -34,6 +34,8 @@ public class SelectInterests extends AppCompatActivity {
     Button btnClimate;
     HashMap<Button, TranslateAnimation> allAnimations;
     ArrayList<String> userCategory;
+    boolean allSelected;
+
 
 
     @Override
@@ -81,10 +83,9 @@ public class SelectInterests extends AppCompatActivity {
                         }
 
                     }
+                    startNextActivity();
 
-                        Intent intent = new Intent(SelectInterests.this, SelectTime.class);
-                        intent.putExtra("categories", userCategory);
-                        startActivity(intent);
+
 
 
                 }
@@ -98,6 +99,18 @@ public class SelectInterests extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
+
+    private void startNextActivity(){
+        Intent intent = new Intent(SelectInterests.this, SelectTime.class);
+        intent.putExtra("categories", userCategory);
+        startActivity(intent);
+        finish();
+    }
+
     private void addToiletListeners(){
         ImageView ivToilet = findViewById(R.id.ivToilet);
         ivToilet.setOnClickListener(new View.OnClickListener() {
@@ -108,15 +121,20 @@ public class SelectInterests extends AppCompatActivity {
                 }else {
 
                     for (final Button curr : allInterests) {
+                        allSelected = true;
                         if (!curr.isSelected()) {
                             TranslateAnimation anim = allAnimations.get(curr);
                             curr.startAnimation(anim);
+                            allSelected = false;
                             if (anim.hasEnded()) {
                                 curr.setVisibility(View.INVISIBLE);
                             }
                         }
                     }
 
+                }
+                if(allSelected){
+                    startNextActivity();
                 }
 
 

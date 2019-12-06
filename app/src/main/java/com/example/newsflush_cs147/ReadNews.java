@@ -50,7 +50,7 @@ public class ReadNews extends AppCompatActivity {
             public void onClick(View v) {
                 Intent sharingIntent = new Intent(Intent.ACTION_SEND);
                 sharingIntent.setType("text/html");
-                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml("<p>This is the text shared.</p>"));
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml("<p>Hi mate! Here's an article for the next time you poop.</p>" + "<u>www.newsflush.com/ </u>" + category.toLowerCase() + "_article324"));
                 if (sharingIntent.resolveActivity(getPackageManager()) != null) {
                     startActivity(Intent.createChooser(sharingIntent,"Share using"));
                 }

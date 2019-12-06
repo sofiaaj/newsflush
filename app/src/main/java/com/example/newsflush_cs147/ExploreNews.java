@@ -55,7 +55,6 @@ public class ExploreNews extends AppCompatActivity {
         NewsAdapter newsAdapter = new NewsAdapter(newsList, userCategory);
         rvNews.setAdapter(newsAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setReverseLayout(true);
         rvNews.setLayoutManager(layoutManager);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -81,7 +80,7 @@ public class ExploreNews extends AppCompatActivity {
         return true;
     }
 
-    public void onButtonShowPopupWindowClick(MenuItem item) {
+    public void onButtonShowPopupWindowClick(View item) {
 
         // inflate the layout of the popup window
         LayoutInflater inflater = (LayoutInflater)
@@ -93,7 +92,7 @@ public class ExploreNews extends AppCompatActivity {
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
         boolean focusable = true; // lets taps outside the popup also dismiss it
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-        popupWindow.showAtLocation(toolbar, Gravity.TOP | Gravity.RIGHT, 45, 45);
+        popupWindow.showAtLocation(toolbar, Gravity.TOP|Gravity.RIGHT, 45, 45);
         TextView tvZipcode = popupView.findViewById(R.id.tvZipcode);
         TextView tvInterests = popupView.findViewById(R.id.tvInterests);
         TextView tvCancel = popupView.findViewById(R.id.tvCancel);
@@ -117,5 +116,20 @@ public class ExploreNews extends AppCompatActivity {
                 popupWindow.dismiss();
             }
         });
+
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window tolken
+
+
+        // dismiss the popup window when touched
+//        popupView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//
+//                popupWindow.dismiss();
+//                return true;
+//            }
+//        });
     }
 }

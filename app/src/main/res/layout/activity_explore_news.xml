@@ -15,37 +15,33 @@
         android:minHeight="?attr/actionBarSize"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@android:color/white">
+        app:titleTextColor="@android:color/white"/>
 
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|center_vertical"
-            android:fontFamily="@font/oswald"
-            android:gravity="center_vertical"
-            android:text="NEWSFLUSH"
-            android:textColor="@android:color/white"
-            android:textSize="30sp"
-            tools:layout_editor_absoluteX="166dp"
-            tools:layout_editor_absoluteY="15dp" />
-
-    </androidx.appcompat.widget.Toolbar>
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="190dp"
+        android:layout_height="37dp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_toolbar" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="389dp"
-        android:layout_height="198dp"
+        android:layout_width="305dp"
+        android:layout_height="177dp"
+        android:layout_marginTop="42dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/tp" />
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="440dp"
         android:layout_height="748dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginLeft="45dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
@@ -53,8 +49,8 @@
 
     <ImageView
         android:id="@+id/ivBack"
-        android:layout_width="71dp"
-        android:layout_height="49dp"
+        android:layout_width="60dp"
+        android:layout_height="44dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="24dp"
@@ -71,5 +67,17 @@
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <ImageView
+        android:id="@+id/ivSettings"
+        android:layout_width="38dp"
+        android:layout_height="34dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:onClick="onButtonShowPopupWindowClick"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/settings" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
